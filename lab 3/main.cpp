@@ -1,70 +1,56 @@
-#include <iostream>
-#include "buffer.h"
-#include "curc.h"
-#include <algorithm>
+#include "algorithms.h"
+#include <vector>
+
 
 int main() {
-    Circle<int> CircleBuffer(6);
-    Circle<int>::Iterator it = CircleBuffer.Begin();
-    for (int i = 1; i <= 10; i++) {
-        CircleBuffer.Push_Front(i);
+
+    vector <double> v = { 1,2,3,5,4};
+//    if (all_of(v.begin(), v.end(), bigger_then_two<int>)) {
+//        cout << "True\n";
+//    }
+//    else {
+//        cout << "False\n";
+//    }
+//
+//
+//    if (any_of(v.begin(), v.end(), bigger_then_two<int>)) {
+//        cout << "True\n";
+//    }
+//    else {
+//        cout << "False\n";
+//    }
+//
+//    if (none_of(v.begin(), v.end(), bigger_then_two<int>)) {
+//        cout << "True\n";
+//    }
+//    else {
+//        cout << "False\n";
+//    }
+//
+//    if (one_of(v.begin(), v.end(), bigger_then_two<int>)) {
+//        cout << "True\n";
+//    }
+//    else {
+//        cout << "False\n";
+//    }
+//
+//    if (is_sorted(v.begin(), v.end(), compare<int>)) {
+//        cout << "True\n";
+//    }
+//    else {
+//        cout << "False\n";
+//    }
+
+    auto is_even = [](int i){ return i % 2 == 0; };
+
+    if (is_partitioned(v.begin(), v.end(), is_even)) {
+        cout << "True\n";
     }
-    std::cout << "Buffer state with iterator: ";
-    for (it = CircleBuffer.Begin(); it != CircleBuffer.End(); it++) {
-        std::cout << *it << " ";
+    else {
+        cout << "False\n";
     }
-    std::cout << *CircleBuffer.End() << std::endl;
-    std::cout << "Add first element:\n";
-    CircleBuffer.Push_Back(3);
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
 
-    std::cout << "\n Add last element:\n";
-    CircleBuffer.Push_Front(5);
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
-
-    std::cout << "\n Delete first element:\n";
-    CircleBuffer.Pop_Front();
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
-
-    std::cout << "\nDelete last element:\n";
-    CircleBuffer.Pop_Back();
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
-
-    std::cout << "\nDelete all elements with iterator:\n";
-    it = CircleBuffer.Begin();
-    while (!CircleBuffer.Is_Empty()) {
-        CircleBuffer.Delete(it);
-        it++;
-    }
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
-    std::cout << std::endl;
-    std::cout << "Buffer size: ";
-    std::cout << CircleBuffer.Capacity();
-    std::cout << "\nBuffer resize to 10\n";
-    CircleBuffer.Resize(10);
+    return 0;
 
 
-    std::cout << "Insert new numbers: \n";
-    for (int i = 1; i <= 10; i++) {
-        CircleBuffer.Push_Back(i);
-    }
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
-    std::cout << std::endl;
-
-
-    std::cout << "Replace elements:\n";
-    *(CircleBuffer.Begin()) = -7;
-    *(CircleBuffer.End()) = -9;
-    CircleBuffer.Push(it, 7);
-    for (int i = 0; i < CircleBuffer.Size(); i++)
-        std::cout << CircleBuffer[i] << " ";
-    std::cout << std::endl;
-
-return 0;
 }
